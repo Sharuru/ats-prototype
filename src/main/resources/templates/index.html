@@ -75,31 +75,6 @@
 <script type="text/javascript">
     $("#card-gantt").tab("show");
 
-    var tasks = {
-        data: [
-            {
-                id: 1, text: "Project #1", start_date: "2018-04-01", duration: 18, order: 10,
-                progress: 0.4, open: true
-            },
-            {
-                id: 2, text: "Task #1 Design", start_date: "2018-04-01", duration: 6, order: 10,
-                progress: 0.6, parent: 1
-            },
-            {
-                id: 3, text: "Task #2 Development", start_date: "2018-04-07", duration: 6, order: 20,
-                progress: 0.6, parent: 1
-            },
-            {
-                id: 4, text: "Task #3 Unit Test", start_date: "2018-04-13", duration: 6, order: 20,
-                progress: 0.6, parent: 1
-            }
-        ],
-        links: [
-            {id: 1, source: 1, target: 2, type: "1"},
-            {id: 2, source: 2, target: 3, type: "0"},
-            {id: 3, source: 3, target: 4, type: "0"}
-        ]
-    };
     gantt.config.xml_date = "%Y-%m-%d";
     gantt.config.task_date = "%Y-%m-%d";
     gantt.config.autosize = "y";
@@ -118,8 +93,15 @@
         {name:"duration",   label:"Duration",   resize:true, align:"center", min_width:70},
         {name:"add",        label:"",           resize:true, min_width:50 }
     ];
+    gantt.templates.tooltip_text = function(start, end, task){
+         return "<b>Task:</b> " + task.text + "@Level " + task.ext_task_rank + "<br/>"
+             + "<b>Resources:</b>" + task.dummy + "@Level " + task.dummy;
+    };
     gantt.init("gantt-graph");
-    gantt.parse(tasks);
+    gantt.load("api/loadGanttTasks");
+    gantt.attachEvent("onLoadEnd", function(){
+        gantt.open("1");
+    });
 </script>
 </body>
 </html>
