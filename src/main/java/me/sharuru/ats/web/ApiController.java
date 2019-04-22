@@ -1,7 +1,7 @@
 package me.sharuru.ats.web;
 
 import lombok.extern.slf4j.Slf4j;
-import me.sharuru.ats.model.response.GanttGraphResponse;
+import me.sharuru.ats.model.response.GanttTasksResponse;
 import me.sharuru.ats.service.GanttService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,7 +19,7 @@ public class ApiController {
 
     @ResponseBody
     @GetMapping("/loadGanttTasks")
-    public GanttGraphResponse loadTasks() {
+    public GanttTasksResponse loadTasks() {
         return ganttService.loadGanttTasks();
     }
 }

@@ -94,7 +94,7 @@
         {name:"add",        label:"",           resize:true, min_width:50 }
     ];
     gantt.templates.tooltip_text = function(start, end, task){
-         return "<b>Task:</b> " + task.text + "@Level " + task.ext_task_rank + "<br/>"
+         return "<b>Task:</b> " + task.text + "@Level " + task.extendMeta.taskRank + "<br/>"
              + "<b>Resources:</b>" + task.dummy + "@Level " + task.dummy;
     };
     gantt.init("gantt-graph");
